@@ -1,10 +1,15 @@
 import axios from 'axios';
-const API =axios.create({baseURL:'https://financial-analytics-backend.onrender.com'});
-API .interceptors.request.use((req)=>{
-  if (localStorage.getItem('token')){
-    req.headers.Authorization=`Bearer ${localStorage.getItem('token')}`;
+
+const API = axios.create({
+  baseURL: 'https://financial-analytics-backend.onrender.com/api'
+});
+
+API.interceptors.request.use((req) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    req.headers.Authorization = `Bearer ${token}`;
   }
   return req;
-
 });
+
 export default API;
